@@ -88,7 +88,7 @@ def add_pushups(update, context, num_pushups=None):
     notify_all(
         context,
         data=data,
-        update_msg='Эй ты! ленивая задница! Некто {} нахуярил уже {} отжиманий'.format(
+        update_msg='Эй ты, ленивая задница! Некто {} нахуярил ещё {} отжиманий!'.format(
             username,
             num_pushups,
         ),
