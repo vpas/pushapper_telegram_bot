@@ -19,6 +19,31 @@ CHAT_ID = -495468183
 CHAT_ID_RAVENKLO = 192021208
 
 
+def format_days(x):
+  if x % 10 == 1 and x // 10 != 1:
+    return "{} день".format(x)
+  elif x % 10 in (2, 3, 4) and x // 10 != 1:
+    return "{} дня".format(x)
+  else:
+    return "{} дней".format(x)
+
+def format_hours(x):
+  if x % 10 == 1 and x // 10 != 1:
+    return "{} час".format(x)
+  elif x % 10 in (2, 3, 4) and x // 10 != 1:
+    return "{} часа".format(x)
+  else:
+    return "{} часов".format(x)
+
+def format_time(days, hours):
+  if days == 0:
+    return format_hours(hours)
+  elif hours == 0:
+    return format_days(days) + " ровно"
+  else:
+    return format_days(days) + " и " + format_hours(hours)
+
+
 class Data:
     DEFAULT_DATA = {
         'notify_chat_id': CHAT_ID_RAVENKLO,
@@ -77,9 +102,11 @@ class Data:
         self.clear_if_needed()
         leaderboard_lines = []
         time_left = self.get_time_left()
-        leaderboard_lines.append('Хреначить осталось дней: {} | часов: {}'.format(
-            time_left.days,
-            time_left.seconds // (60 * 60),
+        leaderboard_lines.append('Хреначить осталось {}'.format(
+            format_time(
+              time_left.days, 
+              time_left.seconds // (60 * 60)
+            ),
         ))
         leaderboard_lines.extend([
             '{}: {}'.format(k, v)
