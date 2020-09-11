@@ -137,6 +137,9 @@ class Data:
     def get_clear_every_n_days(self):
         return self.get_data_attr('clear_every_n_days')
 
+    def get_bot_token(self):
+        return self.get_data_attr('bot_token')
+
     def set_data_attr(self, attr_name, attr_value):
         if attr_name in self.data and isinstance(self.data[attr_name], int):
             attr_value = int(attr_value)
@@ -238,7 +241,7 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("1389342304:AAEIow_maY4lEdxIvJlHdINgympV6SwHID8", use_context=True)
+    updater = Updater(Data().get_bot_token(), use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('add_pushups_10', functools.partial(add_pushups, num_pushups=10)))
