@@ -102,7 +102,7 @@ class Data:
         self.clear_if_needed()
         leaderboard_lines = []
         time_left = self.get_time_left()
-        leaderboard_lines.append('Хреначить осталось {}'.format(
+        leaderboard_lines.append('Хреначить осталось {} пёс!'.format(
             format_time(
               time_left.days, 
               time_left.seconds // (60 * 60)
