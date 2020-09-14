@@ -173,6 +173,12 @@ def start(update, context):
     print('*' * 100)
     print(update.effective_message)
 
+def get_pep_talk(username, num_pushups):
+    """Get a motivating message based on your comrade username and their performance"""
+    return 'Эй ты! ленивая задница! Некто {} нахуярил уже {} отжиманий'.format(
+        username,
+        num_pushups,
+    )
 
 def add_pushups(update, context, num_pushups=None):
     print('*' * 100)
@@ -194,10 +200,7 @@ def add_pushups(update, context, num_pushups=None):
             )
         )
 
-    update_msg_lines.append('Эй ты! ленивая задница! Некто {} нахуярил уже {} отжиманий'.format(
-        username,
-        num_pushups,
-    ))
+    update_msg_lines.append(get_pep_talk(username, num_pushups))
 
     data.add_pushups(username=username, num_pushups=num_pushups)
     notify_all(
