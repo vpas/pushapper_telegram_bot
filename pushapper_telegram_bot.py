@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import time
+import random
 
 from datetime import datetime, timedelta
 
@@ -173,10 +174,45 @@ def start(update, context):
     print('*' * 100)
     print(update.effective_message)
 
-def get_pep_talk(username, num_pushups):
+def get_pep_talk(username, num_pushups, seed=None):
     """Get a motivating message based on your comrade username and their performance"""
-    return 'Эй ты! ленивая задница! Некто {} нахуярил уже {} отжиманий'.format(
+    if seed is not None:
+        random.seed(seed)
+    s1 = [
+        'Эй ты! Ленивая задница! ',
+        'Эй ты! Ленивая задница! ',
+        'Эй ты, жиробас! ',
+        'Эй ты! ',
+        '',
+    ]
+    s2 = [
+        'Пока ты дрочил писю, ',
+        'Пока ты смотрел кулинарное шоу, ',
+        'Пока ты делал свой PhD, ',
+        'Пока ты качал задницу, ',
+        'Пока ты жрал макароны с майонезом, ',
+        ''
+    ]
+    s3 = [
+        'некто ',
+        'некто ',
+        'камрад ',
+        'гражданин ',
+        'братиша ',
+        '',
+    ]
+    s4 = [
+        '',
+        '',
+        '',
+        'легчайше ',
+    ]
+    return '{}{}{}{} {}нахуярил уже {} отжиманий.'.format(
+        random.choice(s1),
+        random.choice(s2),
+        random.choice(s3),
         username,
+        random.choice(s4),
         num_pushups,
     )
 
