@@ -36,9 +36,20 @@ def format_hours(x):
   else:
     return "{} часов".format(x)
 
-def format_time(days, hours):
+def format_minutes(x):
+  if x % 10 == 1 and x // 10 != 1:
+    return "{} минута".format(x)
+  elif x % 10 in (2, 3, 4) and x // 10 != 1:
+    return "{} минуты".format(x)
+  else:
+    return "{} минут".format(x)
+
+def format_time(days, hours, minutes):
   if days == 0:
-    return format_hours(hours)
+    if hours == 0:
+        return format_minutes(minutes)
+    else:
+        return format_hours(hours)
   elif hours == 0:
     return format_days(days) + " ровно"
   else:
@@ -105,8 +116,9 @@ class Data:
         time_left = self.get_time_left()
         leaderboard_lines.append('Хреначить осталось {}, пёс!'.format(
             format_time(
-              time_left.days, 
-              time_left.seconds // (60 * 60)
+              time_left.days,
+              time_left.seconds // (60 * 60),
+              (time_left.seconds % (60 * 60)) // 60,
             ),
         ))
         leaderboard_lines.extend([
@@ -219,7 +231,7 @@ def get_pep_talk(username, num_pushups, seed=None):
         'стремительно ',
         'неумолимо ',
         'оздоровительно ',
-        'бесшумно ',   
+        'бесшумно ',
         'резво ',
         'неторопливо ',
         'неспешно ',
